@@ -19,12 +19,12 @@ exports.up = async function(knex) {
         table.text('task_description').notNull();
         table.text('task_notes');
         table.boolean('task_completed').defaultTo(false);
-        table.integer('project_id').notNull().references('project_id').inTable('projects');
+        table.integer('project_id').references('project_id').inTable('projects');
     });
  
     await knex.schema.createTable('project_resources', table => {
-        table.integer('project_id').notNull().references('project_id').inTable('projects');
-        table.integer('resource_id').notNull().references('resource_id').inTable('resources');
+        table.integer('project_id').references('project_id').inTable('projects');
+        table.integer('resource_id').references('resource_id').inTable('resources');
         table.primary(['project_id', 'resource_id']);
     });
 };
